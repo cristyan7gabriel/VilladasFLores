@@ -9,19 +9,19 @@ const baskets = [
   {
     num: "01",
     title: "Cesta Amanhecer",
-    desc: "Perfeita para começar o dia. Uma combinação suave de itens de café da manhã, frutas frescas e acompanhada por flores delicadas que aquecem qualquer manhã.",
+    desc: "Perfeita para começar o dia. Uma combinação suave de itens de café da manhã, frutas frescas e selecionadas que aquecem qualquer manhã.",
     image: "/Cestas_fotos/WhatsApp Image 2026-03-23 at 20.36.05(1).jpeg"
   },
   {
     num: "02",
     title: "Cesta Celebração",
-    desc: "A escolha ideal para brindar conquistas e datas especiais. Uma seleção sofisticada pensada para momentos inesquecíveis, realçada pelas nossas flores.",
+    desc: "A escolha ideal para brindar conquistas e datas especiais. Uma seleção sofisticada de itens gourmet pensada para momentos inesquecíveis.",
     image: "/Cestas_fotos/WhatsApp Image 2026-03-23 at 20.36.05(2).jpeg"
   },
   {
     num: "03",
     title: "Cesta Momentos",
-    desc: "Elegante e acolhedora, esta cesta reúne surpresas e sabores únicos. Uma verdadeira experiência sensorial harmonizada com o design floral da Villa.",
+    desc: "Elegante e acolhedora, esta cesta reúne surpresas e sabores únicos. Uma verdadeira experiência sensorial com a curadoria exclusiva da Villa.",
     image: "/Cestas_fotos/WhatsApp Image 2026-03-23 at 20.36.05.jpeg"
   },
   {
@@ -39,7 +39,7 @@ const baskets = [
   {
     num: "06",
     title: "Cesta Jardim Real",
-    desc: "Flores nobres e iguarias finas em um arranjo majestoso e imponente.",
+    desc: "Iguarias finas e itens artesanais em um arranjo majestoso e imponente para grandes ocasiões.",
     image: "/Cestas_fotos/62c92308-3742-4beb-83c1-805879ea4497.jpg"
   },
   {
@@ -51,7 +51,7 @@ const baskets = [
   {
     num: "08",
     title: "Cesta Gourmet Villa",
-    desc: "Uma experiência gastronômica completa harmonizada com nossas flores.",
+    desc: "Uma experiência gastronômica completa com seleção de queijos, vinhos e acompanhamentos finos.",
     image: "/Cestas_fotos/IMG_0553.jpg"
   },
   {
@@ -63,7 +63,7 @@ const baskets = [
   {
     num: "10",
     title: "Cesta Amor & Aroma",
-    desc: "Fragrâncias naturais envoltas em pétalas de rosas selecionadas a dedo.",
+    desc: "Fragrâncias naturais e itens de autocuidado envoltos em uma apresentação impecável e cheia de afeto.",
     image: "/Cestas_fotos/IMG_4916.jpg"
   },
   {
@@ -81,13 +81,13 @@ const baskets = [
   {
     num: "13",
     title: "Cesta Luxo Botânico",
-    desc: "O auge da sofisticação em cestaria personalizada e design floral.",
+    desc: "O auge da sofisticação em cestaria personalizada com curadoria de itens premium.",
     image: "/Cestas_fotos/IMG_8105.jpg"
   },
   {
     num: "14",
     title: "Cesta Doce Encanto",
-    desc: "Chocolates artesanais e flores vibrantes para adoçar momentos únicos.",
+    desc: "Chocolates artesanais e doces finos selecionados para adoçar momentos únicos e especiais.",
     image: "/Cestas_fotos/IMG_9319.jpg"
   },
   {
@@ -99,7 +99,7 @@ const baskets = [
   {
     num: "16",
     title: "Cesta Afeto Sincero",
-    desc: "Um abraço em forma de cesta, montada com as melhores flores do dia.",
+    desc: "Um abraço em forma de cesta, montada com itens que expressam carinho e atenção em cada detalhe.",
     image: "/Cestas_fotos/ab1e3482-956e-4ce6-9cca-0f5012818534.jpg"
   }
 ];
