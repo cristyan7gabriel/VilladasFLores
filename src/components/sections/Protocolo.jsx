@@ -107,6 +107,7 @@ const baskets = [
 export const Protocolo = () => {
   const sectionRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [expandedId, setExpandedId] = useState(null);
   
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -139,6 +140,10 @@ export const Protocolo = () => {
 
   const whatsappLink = (title) => {
     return `https://wa.me/556233002097?text=${encodeURIComponent('Olá! Gostaria de saber mais sobre a ' + title + ' da Villa das Flores.')}`;
+  };
+
+  const toggleExpand = (id) => {
+    setExpandedId(expandedId === id ? null : id);
   };
 
   return (
@@ -194,7 +199,10 @@ export const Protocolo = () => {
       {/* Ver Mais Button Area */}
       <div className="flex justify-center mt-20 relative z-10">
         <button 
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            setIsModalOpen(true);
+            setExpandedId(null);
+          }}
           className="group relative overflow-hidden bg-primary text-background px-12 py-5 rounded-full font-sans font-bold text-lg transition-all hover:scale-105 hover:shadow-2xl"
         >
           <span className="relative z-10">Ver Todas as Opções</span>
@@ -213,7 +221,7 @@ export const Protocolo = () => {
           <div className="relative w-full max-w-7xl h-full bg-background rounded-[3rem] overflow-hidden flex flex-col shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/10 animate-fade-in-up">
             
             {/* Modal Header */}
-            <div className="p-8 md:p-12 flex items-center justify-between border-b border-primary/10">
+            <div className="p-8 md:p-12 flex items-center justify-between border-b border-primary/10 flex-shrink-0">
               <div>
                 <h2 className="font-sans font-bold text-3xl md:text-4xl text-primary tracking-tighter">Nossa Coleção Completa</h2>
                 <p className="font-serif italic text-lg text-dark/60 mt-2">Escolha a experiência perfeita para presentear.</p>
@@ -228,34 +236,52 @@ export const Protocolo = () => {
 
             {/* Modal Content - Grid */}
             <div className="flex-grow overflow-y-auto p-8 md:p-12 custom-scrollbar">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {baskets.map((item, idx) => (
-                  <div key={idx} className="group flex flex-col h-full bg-primary/5 rounded-[2rem] overflow-hidden border border-primary/10 transition-all hover:-translate-y-2 hover:shadow-xl">
-                    <div className="h-64 relative overflow-hidden">
-                      <img 
-                        src={item.image} 
-                        alt={item.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 items-start">
+                {baskets.map((item, idx) => {
+                  const isExpanded = expandedId === item.num;
+                  return (
+                    <div 
+                      key={idx} 
+                      onClick={() => toggleExpand(item.num)}
+                      className={`group flex flex-col h-full bg-primary/5 rounded-[2.5rem] overflow-hidden border border-primary/10 transition-all duration-500 cursor-pointer hover:shadow-xl ${isExpanded ? 'lg:col-span-2 ring-2 ring-accent shadow-2xl' : 'hover:-translate-y-2'}`}
+                    >
+                      <div className={`relative overflow-hidden transition-all duration-500 ${isExpanded ? 'h-96' : 'h-64'}`}>
+                        <img 
+                          src={item.image} 
+                          alt={item.title} 
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-8 flex flex-col flex-grow">
+                        <span className="font-mono text-xs text-primary/40 mb-3 tracking-widest">#{item.num}</span>
+                        <h4 className="font-sans font-bold text-2xl text-primary mb-4 tracking-tight">{item.title}</h4>
+                        <p className={`text-base text-dark/70 font-sans leading-relaxed transition-all duration-300 ${isExpanded ? '' : 'line-clamp-3'}`}>
+                          {item.desc}
+                        </p>
+                        
+                        <div className={`mt-8 transition-all duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+                           <a 
+                            href={whatsappLink(item.title)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full flex items-center justify-center gap-2 bg-accent text-background font-bold py-4 rounded-full uppercase tracking-wider text-sm hover:bg-primary hover:-translate-y-1 transition-all shadow-lg"
+                          >
+                            <MessageCircle size={18} />
+                            Pedir Agora
+                          </a>
+                        </div>
+                        
+                        {/* Expand/Collapse Hint */}
+                        {!isExpanded && (
+                          <div className="mt-4 text-[10px] font-mono text-primary/30 uppercase tracking-[0.2em]">
+                            Clique para expandir
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div className="p-6 flex flex-col flex-grow">
-                      <span className="font-mono text-xs text-primary/40 mb-2">#{item.num}</span>
-                      <h4 className="font-sans font-bold text-xl text-primary mb-3">{item.title}</h4>
-                      <p className="text-sm text-dark/70 font-sans mb-6 line-clamp-3">
-                        {item.desc}
-                      </p>
-                      <a 
-                        href={whatsappLink(item.title)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-auto flex items-center justify-center gap-2 bg-accent text-background text-xs font-bold py-3 rounded-full uppercase tracking-tighter hover:bg-primary transition-colors"
-                      >
-                        <MessageCircle size={14} />
-                        Pedir Agora
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
