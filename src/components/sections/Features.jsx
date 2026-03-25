@@ -152,7 +152,7 @@ export const Features = () => {
     if (isExpanding && event) {
       setTimeout(() => {
         event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }, 150);
+      }, 300); // Increased delay for layout shift to complete
     }
   };
 
@@ -170,7 +170,7 @@ export const Features = () => {
         ease: "power3.out"
       });
       
-      // Cards Entrance - Using a more reliable strategy
+      // Cards Entrance
       gsap.from(".bouquet-card", {
         scrollTrigger: {
           trigger: scrollContainerRef.current,
@@ -237,7 +237,7 @@ export const Features = () => {
         <div className="relative w-full -mx-4 px-4 overflow-visible">
           <div 
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden min-h-[400px]" 
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden min-h-[450px] scroll-px-6 md:scroll-px-20" 
           >
             {bouquets.map((item) => {
               const isExpanded = expandedId === item.id;
@@ -245,11 +245,11 @@ export const Features = () => {
                 <div 
                   key={item.id} 
                   onClick={(e) => toggleExpand(item.id, e)}
-                  className={`bouquet-card snap-start flex flex-col gap-6 scroll-ml-4 transition-all duration-500 cursor-pointer ${isExpanded ? 'min-w-[100%] lg:min-w-[60%]' : 'min-w-[100%] sm:min-w-[calc(50%-0.75rem)] lg:min-w-[calc(33.333%-1rem)]'}`}
+                  className={`bouquet-card flex flex-col gap-6 transition-all duration-500 cursor-pointer ${isExpanded ? 'snap-center min-w-[100%] lg:min-w-[70%]' : 'snap-start min-w-[100%] sm:min-w-[calc(50%-0.75rem)] lg:min-w-[calc(33.333%-1rem)]'}`}
                 >
-                  <div className={`bg-primary/5 rounded-[2.5rem] p-4 border transition-all duration-500 flex flex-col h-full ${isExpanded ? 'border-accent shadow-2xl' : 'border-primary/10 group hover:border-primary/30'}`}>
+                  <div className={`bg-primary/5 rounded-[2.5rem] p-4 border transition-all duration-500 flex flex-col h-full ${isExpanded ? 'border-accent shadow-2xl md:flex-row gap-8 md:p-8' : 'border-primary/10 group hover:border-primary/30'}`}>
                     {/* Image container */}
-                    <div className={`relative w-full rounded-[2rem] overflow-hidden mb-6 transition-all duration-500 bg-primary/10 ${isExpanded ? 'h-[28rem] md:h-[32rem]' : 'h-80'}`}>
+                    <div className={`relative rounded-[2rem] overflow-hidden transition-all duration-500 bg-primary/10 flex-shrink-0 ${isExpanded ? 'w-full md:w-1/2 h-96 md:h-[35rem]' : 'w-full h-80'}`}>
                       <img 
                         src={item.image} 
                         alt={item.name} 
@@ -259,30 +259,31 @@ export const Features = () => {
                     </div>
                     
                     {/* Content */}
-                    <div className="px-4 flex-grow flex flex-col">
-                      <h3 className="font-sans font-bold text-2xl text-primary tracking-tight">{item.name}</h3>
-                      <p className={`text-dark/70 mt-4 font-sans leading-relaxed transition-all duration-300 ${isExpanded ? 'text-lg' : 'line-clamp-3 mb-6'}`}>
+                    <div className={`flex flex-col flex-grow text-left ${isExpanded ? 'justify-center py-4 md:py-8' : 'px-4'}`}>
+                      <h3 className={`font-sans font-bold text-primary tracking-tight transition-all duration-300 ${isExpanded ? 'text-4xl md:text-5xl lg:text-6xl mb-6' : 'text-2xl mb-4'}`}>
+                        {item.name}
+                      </h3>
+                      
+                      <p className={`text-dark/70 font-sans leading-relaxed transition-all duration-300 ${isExpanded ? 'text-xl md:text-2xl mb-10 max-w-xl' : 'line-clamp-3 mb-6'}`}>
                         {item.description}
                       </p>
                       
-                      {isExpanded && (
-                        <div className="mt-8">
+                      {isExpanded ? (
+                        <div className="animate-fade-in mt-auto">
                           <a 
                             href={`https://wa.me/556233002097?text=${whatsappMessage(item.name)}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="w-full relative overflow-hidden rounded-full bg-accent px-8 py-5 flex items-center justify-center gap-2 text-background font-sans font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg"
+                            className="inline-flex items-center justify-center gap-3 bg-accent text-background px-10 py-5 rounded-full font-sans font-bold text-lg transition-transform hover:-translate-y-1 hover:shadow-2xl w-full sm:w-fit"
                           >
-                            <MessageCircle size={20} />
+                            <MessageCircle size={24} />
                             Encomendar via WhatsApp
                           </a>
                         </div>
-                      )}
-
-                      {!isExpanded && (
+                      ) : (
                         <div className="mt-4 text-[10px] font-mono text-primary/30 uppercase tracking-[0.2em]">
-                          Clique para ver mais
+                          Clique para expandir
                         </div>
                       )}
                     </div>
@@ -290,6 +291,9 @@ export const Features = () => {
                 </div>
               );
             })}
+            
+            {/* Added spacer to allow centering the last item */}
+            <div className="min-w-[10vw] hidden lg:block" aria-hidden="true" />
           </div>
         </div>
         
