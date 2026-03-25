@@ -8,186 +8,132 @@ gsap.registerPlugin(ScrollTrigger);
 const bouquets = [
   {
     id: 1,
-    name: "Buquê Romântico",
-    description: "Um clássico atemporal com flores selecionadas e folhagens delicadas, perfeito para surpreender.",
-    image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.46.59(1).jpeg"
-  },
-  {
-    id: 2,
     name: "Arranjo Campestre",
     description: "Mix vibrante de flores silvestres que traz a alegria e frescor da natureza para qualquer ambiente.",
     image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.46.59(2).jpeg"
   },
   {
-    id: 3,
+    id: 2,
     name: "Elegância Floral",
     description: "Composição sofisticada em tons suaves com flores raras e textura única, ideal para presentear.",
     image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.46.59.jpeg"
   },
   {
-    id: 4,
-    name: "Mix Primavera",
-    description: "Alegre e colorido, este buquê mistura as melhores flores da estação com muito charme.",
-    image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.47.00(1).jpeg"
-  },
-  {
-    id: 5,
+    id: 3,
     name: "Luz da Manhã",
     description: "Arranjo suave que desperta sentimentos de tranquilidade, renovação e paz interior.",
     image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.47.00(2).jpeg"
   },
   {
-    id: 6,
+    id: 4,
     name: "Paixão Intensa",
     description: "Flores em tons envolventes e quentes, ideais para marcar datas inesquecíveis.",
     image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.47.00(3).jpeg"
   },
   {
-    id: 7,
+    id: 5,
     name: "Jardim Secreto",
     description: "Folhagens texturizadas contrastando lindamente com flores exóticas e misteriosas.",
     image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.47.00(4).jpeg"
   },
   {
-    id: 8,
+    id: 6,
     name: "Doçura em Pétalas",
     description: "Um abraço em forma de buquê, combinando uma paleta delicada e cheia de afeto.",
     image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.47.00.jpeg"
   },
   {
-    id: 9,
-    name: "Aurélia Premium",
-    description: "A mais fina curadoria das flores nobres da estação, em uma montagem simetricamente impecável.",
-    image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.47.01(3).jpeg"
-  },
-  {
-    id: 10,
-    name: "Essência da Villa",
-    description: "A assinatura autêntica do nosso ateliê, unindo frescor duradouro e aromas inconfundíveis.",
-    image: "/buques_fotos/WhatsApp Image 2026-03-23 at 20.47.01.jpeg"
-  },
-  {
-    id: 11,
+    id: 7,
     name: "Sinfonia de Cores",
     description: "Uma explosão vibrante de tons que ilumina qualquer dia.",
     image: "/buques_fotos/IMG_0228.jpg"
   },
   {
-    id: 12,
+    id: 8,
     name: "Encanto do Campo",
     description: "A simplicidade rústica combinada com a elegância natural.",
     image: "/buques_fotos/IMG_0251.jpg"
   },
   {
-    id: 13,
+    id: 9,
     name: "Pureza Branca",
     description: "Rosas brancas e lírios em uma composição de paz e sofisticação.",
     image: "/buques_fotos/IMG_0268.jpg"
   },
   {
-    id: 14,
-    name: "Alvorada Radiante",
-    description: "Design moderno e de contornos artísticos, para quem enxerga a floricultura como arte.",
-    image: "/buques_fotos/IMG_0300.jpg"
-  },
-  {
-    id: 15,
-    name: "Noite de Gala",
-    description: "Flores escuras e profundas para momentos de mistério e paixão.",
-    image: "/buques_fotos/IMG_0404.jpg"
-  },
-  {
-    id: 16,
-    name: "Brisa de Verão",
-    description: "Leveza e frescor em um arranjo que respira juventude.",
-    image: "/buques_fotos/IMG_0415.jpg"
-  },
-  {
-    id: 17,
+    id: 10,
     name: "Tesouro Escondido",
     description: "Espécies raras e folhagens esculturais em um design único.",
     image: "/buques_fotos/IMG_0457.jpg"
   },
   {
-    id: 18,
+    id: 11,
     name: "Abraço de Primavera",
     description: "O renascimento em flores, com perfumes suaves e cores pastel.",
     image: "/buques_fotos/IMG_0476.jpg"
   },
   {
-    id: 19,
+    id: 12,
     name: "Coração da Villa",
     description: "Nossa seleção mais querida, feita com as flores do dia.",
     image: "/buques_fotos/IMG_0504.jpg"
   },
   {
-    id: 20,
+    id: 13,
     name: "Lembrança Eterna",
     description: "Um arranjo clássico que permanece na memória de quem recebe.",
     image: "/buques_fotos/IMG_0627.jpg"
   },
   {
-    id: 21,
+    id: 14,
     name: "Sopro de Vida",
     description: "Movimento e textura em uma peça que celebra a vitalidade.",
     image: "/buques_fotos/IMG_0666.jpg"
   },
   {
-    id: 22,
+    id: 15,
     name: "Delicadeza Infinita",
     description: "Mini rosas e gipsófilas em um gesto de carinho puro.",
     image: "/buques_fotos/IMG_0682.jpg"
   },
   {
-    id: 23,
-    name: "Jardim da Rainha",
-    description: "Majestoso e imponente, ideal para grandes celebrações.",
-    image: "/buques_fotos/IMG_0721.jpg"
-  },
-  {
-    id: 24,
+    id: 16,
     name: "Harmonia Bucólica",
     description: "O equilíbrio perfeito entre o selvagem e o cultivado.",
     image: "/buques_fotos/IMG_0726.jpg"
   },
   {
-    id: 25,
-    name: "Toque de Seda",
-    description: "Pétalas macias e cores suaves que convidam ao toque.",
-    image: "/buques_fotos/IMG_0732.jpg"
-  },
-  {
-    id: 26,
+    id: 17,
     name: "Ouro Botânico",
     description: "Brilho e vivacidade em uma curadoria solar excepcional.",
     image: "/buques_fotos/IMG_0739.jpg"
   },
   {
-    id: 27,
+    id: 18,
     name: "Caminho das Flores",
     description: "Uma trilha de aromas e cores que guiam a emoção.",
     image: "/buques_fotos/IMG_0814.jpg"
   },
   {
-    id: 28,
+    id: 19,
     name: "Essência Silvestre",
     description: "O lado indomável da natureza em um arranjo contemporâneo.",
     image: "/buques_fotos/IMG_9326.jpg"
   },
   {
-    id: 29,
+    id: 20,
     name: "Valsa das Pétalas",
     description: "Ritmo e elegância em cada dobra das flores selecionadas.",
     image: "/buques_fotos/IMG_9725.jpg"
   },
   {
-    id: 30,
+    id: 21,
     name: "Mimo da Villa",
     description: "Compacto e charmoso, perfeito para demonstrar afeto.",
     image: "/buques_fotos/IMG_9859.jpg"
   },
   {
-    id: 31,
+    id: 22,
     name: "Celebrar a Vida",
     description: "Um brinde visual com as cores mais festivas da estação.",
     image: "/buques_fotos/IMG_9864.jpg"

@@ -10,13 +10,13 @@ const baskets = [
     num: "01",
     title: "Cesta Amanhecer",
     desc: "Perfeita para começar o dia. Uma combinação suave de itens de café da manhã, frutas frescas e selecionadas que aquecem qualquer manhã.",
-    image: "/Cestas_fotos/WhatsApp Image 2026-03-23 at 20.36.05(1).jpeg"
+    image: "/Cestas_fotos/WhatsApp Image 2026-03-23 at 20.36.05(2).jpeg"
   },
   {
     num: "02",
     title: "Cesta Celebração",
     desc: "A escolha ideal para brindar conquistas e datas especiais. Uma seleção sofisticada de itens gourmet pensada para momentos inesquecíveis.",
-    image: "/Cestas_fotos/WhatsApp Image 2026-03-23 at 20.36.05(2).jpeg"
+    image: "/Cestas_fotos/WhatsApp Image 2026-03-23 at 20.36.05(1).jpeg"
   },
   {
     num: "03",
@@ -38,66 +38,36 @@ const baskets = [
   },
   {
     num: "06",
-    title: "Cesta Jardim Real",
-    desc: "Iguarias finas e itens artesanais em um arranjo majestoso e imponente para grandes ocasiões.",
-    image: "/Cestas_fotos/62c92308-3742-4beb-83c1-805879ea4497.jpg"
-  },
-  {
-    num: "07",
-    title: "Cesta Simplicidade Bella",
-    desc: "O essencial com o charme inconfundível da Villa nestas peças.",
-    image: "/Cestas_fotos/IMG_0420.jpg"
-  },
-  {
-    num: "08",
-    title: "Cesta Gourmet Villa",
-    desc: "Uma experiência gastronômica completa com seleção de queijos, vinhos e acompanhamentos finos.",
-    image: "/Cestas_fotos/IMG_0553.jpg"
-  },
-  {
-    num: "09",
     title: "Cesta Mimo Especial",
     desc: "Pequenos gestos, grandes significados em uma montagem muito delicada.",
     image: "/Cestas_fotos/IMG_3544.jpg"
   },
   {
-    num: "10",
+    num: "07",
     title: "Cesta Amor & Aroma",
     desc: "Fragrâncias naturais e itens de autocuidado envoltos em uma apresentação impecável e cheia de afeto.",
     image: "/Cestas_fotos/IMG_4916.jpg"
   },
   {
-    num: "11",
+    num: "08",
     title: "Cesta Brinde à Vida",
     desc: "Perfeita para aniversários e conquistas que merecem ser celebradas.",
     image: "/Cestas_fotos/IMG_5563.jpg"
   },
   {
-    num: "12",
-    title: "Cesta Harmonia do Campo",
-    desc: "Tons terrosos e rústicos em uma composição extremamente acolhedora.",
-    image: "/Cestas_fotos/IMG_5568.jpg"
-  },
-  {
-    num: "13",
+    num: "09",
     title: "Cesta Luxo Botânico",
     desc: "O auge da sofisticação em cestaria personalizada com curadoria de itens premium.",
     image: "/Cestas_fotos/IMG_8105.jpg"
   },
   {
-    num: "14",
-    title: "Cesta Doce Encanto",
-    desc: "Chocolates artesanais e doces finos selecionados para adoçar momentos únicos e especiais.",
-    image: "/Cestas_fotos/IMG_9319.jpg"
-  },
-  {
-    num: "15",
+    num: "10",
     title: "Cesta Villa Classic",
     desc: "O design que nos tornou referência, agora em uma versão ainda mais clássica.",
     image: "/Cestas_fotos/IMG_9836.jpg"
   },
   {
-    num: "16",
+    num: "11",
     title: "Cesta Afeto Sincero",
     desc: "Um abraço em forma de cesta, montada com itens que expressam carinho e atenção em cada detalhe.",
     image: "/Cestas_fotos/ab1e3482-956e-4ce6-9cca-0f5012818534.jpg"
@@ -108,15 +78,15 @@ export const Protocolo = () => {
   const sectionRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
-  
+
   useEffect(() => {
     let ctx = gsap.context(() => {
       // Only pin the first 3 cards that are displayed on the scroll
       const cards = gsap.utils.toArray('.protocol-card').slice(0, 3);
-      
+
       cards.forEach((card, index) => {
         if (index === cards.length - 1) return;
-        
+
         ScrollTrigger.create({
           trigger: card,
           start: "top top",
@@ -133,7 +103,7 @@ export const Protocolo = () => {
           })
         });
       });
-      
+
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -148,7 +118,7 @@ export const Protocolo = () => {
 
   return (
     <section id="cestas" ref={sectionRef} className="protocol-section relative bg-background pt-32 pb-48">
-      
+
       <div className="max-w-7xl mx-auto px-6 md:px-16 mb-16 text-center">
         <h2 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-primary tracking-tighter">
           Cestas Personalizadas
@@ -162,16 +132,16 @@ export const Protocolo = () => {
       {baskets.slice(0, 3).map((step, idx) => (
         <div key={idx} className="protocol-card sticky top-0 h-screen w-full flex items-center justify-center p-6 bg-background pt-32 md:pt-6">
           <div className="w-full max-w-6xl h-[80vh] md:h-[75vh] rounded-[3rem] border border-primary/20 bg-background shadow-2xl overflow-hidden flex flex-col md:flex-row">
-            
+
             {/* Graphic Area */}
             <div className="w-full md:w-1/2 bg-dark/5 relative h-64 md:h-full flex-shrink-0 overflow-hidden">
-              <img 
-                src={step.image} 
-                alt={step.title} 
+              <img
+                src={step.image}
+                alt={step.title}
                 className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
               />
             </div>
-            
+
             {/* Content Area */}
             <div className="w-full md:w-1/2 p-8 md:p-20 flex flex-col justify-center">
               <div className="text-xl font-mono text-primary/50 mb-6">/ OPÇÃO {step.num}</div>
@@ -181,8 +151,8 @@ export const Protocolo = () => {
               <p className="text-lg md:text-xl font-sans text-dark/80 max-w-md leading-relaxed">
                 {step.desc}
               </p>
-              
-              <a 
+
+              <a
                 href={whatsappLink(step.title)}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -191,14 +161,14 @@ export const Protocolo = () => {
                 Pedir via WhatsApp
               </a>
             </div>
-            
+
           </div>
         </div>
       ))}
 
       {/* Ver Mais Button Area */}
       <div className="flex justify-center mt-20 relative z-10">
-        <button 
+        <button
           onClick={() => {
             setIsModalOpen(true);
             setExpandedId(null);
@@ -213,20 +183,20 @@ export const Protocolo = () => {
       {/* Modal - Full Collection */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
-          <div 
+          <div
             className="absolute inset-0 bg-dark/90 backdrop-blur-xl transition-opacity"
             onClick={() => setIsModalOpen(false)}
           />
-          
+
           <div className="relative w-full max-w-7xl h-full bg-background rounded-[3rem] overflow-hidden flex flex-col shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/10 animate-fade-in-up">
-            
+
             {/* Modal Header */}
             <div className="p-8 md:p-12 flex items-center justify-between border-b border-primary/10 flex-shrink-0">
               <div>
                 <h2 className="font-sans font-bold text-3xl md:text-4xl text-primary tracking-tighter">Nossa Coleção Completa</h2>
                 <p className="font-serif italic text-lg text-dark/60 mt-2">Escolha a experiência perfeita para presentear.</p>
               </div>
-              <button 
+              <button
                 onClick={() => setIsModalOpen(false)}
                 className="w-12 h-12 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary hover:text-background transition-all hover:rotate-90"
               >
@@ -240,15 +210,15 @@ export const Protocolo = () => {
                 {baskets.map((item, idx) => {
                   const isExpanded = expandedId === item.num;
                   return (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       onClick={() => toggleExpand(item.num)}
                       className={`group flex flex-col h-full bg-primary/5 rounded-[2.5rem] overflow-hidden border border-primary/10 transition-all duration-500 cursor-pointer hover:shadow-xl ${isExpanded ? 'lg:col-span-2 ring-2 ring-accent shadow-2xl' : 'hover:-translate-y-2'}`}
                     >
                       <div className={`relative overflow-hidden transition-all duration-500 bg-primary/5 ${isExpanded ? 'h-[28rem] md:h-[32rem]' : 'h-64'}`}>
-                        <img 
-                          src={item.image} 
-                          alt={item.title} 
+                        <img
+                          src={item.image}
+                          alt={item.title}
                           className={`w-full h-full transition-all duration-700 ${isExpanded ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
                         />
                       </div>
@@ -258,9 +228,9 @@ export const Protocolo = () => {
                         <p className={`text-base text-dark/70 font-sans leading-relaxed transition-all duration-300 ${isExpanded ? '' : 'line-clamp-3'}`}>
                           {item.desc}
                         </p>
-                        
+
                         <div className={`mt-8 transition-all duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-                           <a 
+                          <a
                             href={whatsappLink(item.title)}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -271,7 +241,7 @@ export const Protocolo = () => {
                             Pedir Agora
                           </a>
                         </div>
-                        
+
                         {/* Expand/Collapse Hint */}
                         {!isExpanded && (
                           <div className="mt-4 text-[10px] font-mono text-primary/30 uppercase tracking-[0.2em]">
