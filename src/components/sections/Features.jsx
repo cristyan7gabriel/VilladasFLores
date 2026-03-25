@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
-import { Button } from '../ui/Button';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -204,36 +203,40 @@ export const Features = () => {
     const isExpanding = expandedId !== id;
     setExpandedId(isExpanding ? id : null);
     
-    if (isExpanding) {
+    if (isExpanding && event) {
       setTimeout(() => {
         event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }, 100);
+      }, 150);
     }
   };
 
   useEffect(() => {
     let ctx = gsap.context(() => {
+      // Header Animation
       gsap.from(".carousel-header", {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
         },
-        y: 40,
+        y: 30,
         opacity: 0,
-        duration: 1,
+        duration: 0.8,
         ease: "power3.out"
       });
       
+      // Cards Entrance - Using a more reliable strategy
       gsap.from(".bouquet-card", {
         scrollTrigger: {
           trigger: scrollContainerRef.current,
-          start: "top 85%",
+          start: "top 90%",
+          toggleActions: "play none none none"
         },
-        y: 60,
+        x: 40,
         opacity: 0,
-        stagger: 0.15,
-        duration: 1,
-        ease: "power3.out"
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
+        clearProps: "all" // Ensures styles are cleared after animation
       });
     }, sectionRef);
     return () => ctx.revert();
@@ -285,10 +288,10 @@ export const Features = () => {
           </div>
         </div>
 
-        <div className="relative w-full -mx-4 px-4">
+        <div className="relative w-full -mx-4 px-4 overflow-visible">
           <div 
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden" 
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden min-h-[400px]" 
           >
             {bouquets.map((item) => {
               const isExpanded = expandedId === item.id;
@@ -296,42 +299,41 @@ export const Features = () => {
                 <div 
                   key={item.id} 
                   onClick={(e) => toggleExpand(item.id, e)}
-                  className={`bouquet-card snap-start flex flex-col gap-6 scroll-ml-4 transition-all duration-500 cursor-pointer ${isExpanded ? 'min-w-[100%] sm:min-w-[100%] lg:min-w-[66.666%]' : 'min-w-[100%] sm:min-w-[calc(50%-0.75rem)] lg:min-w-[calc(33.333%-1rem)]'}`}
+                  className={`bouquet-card snap-start flex flex-col gap-6 scroll-ml-4 transition-all duration-500 cursor-pointer ${isExpanded ? 'min-w-[100%] lg:min-w-[60%]' : 'min-w-[100%] sm:min-w-[calc(50%-0.75rem)] lg:min-w-[calc(33.333%-1rem)]'}`}
                 >
-                  <div className={`bg-primary/5 rounded-[2.5rem] p-4 border transition-all duration-500 flex flex-col h-full ${isExpanded ? 'border-accent ring-2 ring-accent/20 shadow-2xl' : 'border-primary/10 group'}`}>
+                  <div className={`bg-primary/5 rounded-[2.5rem] p-4 border transition-all duration-500 flex flex-col h-full ${isExpanded ? 'border-accent shadow-2xl' : 'border-primary/10 group hover:border-primary/30'}`}>
                     {/* Image container */}
-                    <div className={`relative w-full rounded-[2rem] overflow-hidden mb-6 transition-all duration-500 bg-primary/5 ${isExpanded ? 'h-[28rem] md:h-[32rem]' : 'h-80'}`}>
+                    <div className={`relative w-full rounded-[2rem] overflow-hidden mb-6 transition-all duration-500 bg-primary/10 ${isExpanded ? 'h-[28rem] md:h-[32rem]' : 'h-80'}`}>
                       <img 
                         src={item.image} 
                         alt={item.name} 
                         className={`w-full h-full transition-all duration-700 ${isExpanded ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
+                        loading="lazy"
                       />
                     </div>
                     
                     {/* Content */}
                     <div className="px-4 flex-grow flex flex-col">
-                      <h3 className="font-sans font-bold text-2xl md:text-3xl text-primary tracking-tight">{item.name}</h3>
-                      <p className={`text-dark/70 mt-4 font-sans leading-relaxed flex-grow transition-all duration-300 ${isExpanded ? 'text-lg' : 'line-clamp-3 mb-6'}`}>
+                      <h3 className="font-sans font-bold text-2xl text-primary tracking-tight">{item.name}</h3>
+                      <p className={`text-dark/70 mt-4 font-sans leading-relaxed transition-all duration-300 ${isExpanded ? 'text-lg' : 'line-clamp-3 mb-6'}`}>
                         {item.description}
                       </p>
                       
-                      <div className={`mt-8 transition-all duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-                        <a 
-                          href={`https://wa.me/556233002097?text=${whatsappMessage(item.name)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="w-full group relative overflow-hidden rounded-full bg-accent px-8 py-5 flex items-center justify-center gap-2 text-background font-sans font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg"
-                        >
-                          <span className="relative z-10 flex items-center gap-2">
+                      {isExpanded && (
+                        <div className="mt-8">
+                          <a 
+                            href={`https://wa.me/556233002097?text=${whatsappMessage(item.name)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full relative overflow-hidden rounded-full bg-accent px-8 py-5 flex items-center justify-center gap-2 text-background font-sans font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg"
+                          >
                             <MessageCircle size={20} />
                             Encomendar via WhatsApp
-                          </span>
-                          <div className="absolute inset-0 bg-primary/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
-                        </a>
-                      </div>
+                          </a>
+                        </div>
+                      )}
 
-                      {/* Expand Hint */}
                       {!isExpanded && (
                         <div className="mt-4 text-[10px] font-mono text-primary/30 uppercase tracking-[0.2em]">
                           Clique para ver mais
