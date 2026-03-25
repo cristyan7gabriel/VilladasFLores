@@ -198,6 +198,18 @@ const bouquets = [
 export const Features = () => {
   const sectionRef = useRef(null);
   const scrollContainerRef = useRef(null);
+  const [expandedId, setExpandedId] = useState(null);
+  
+  const toggleExpand = (id, event) => {
+    const isExpanding = expandedId !== id;
+    setExpandedId(isExpanding ? id : null);
+    
+    if (isExpanding) {
+      setTimeout(() => {
+        event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }, 100);
+    }
+  };
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -278,41 +290,58 @@ export const Features = () => {
             ref={scrollContainerRef}
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden" 
           >
-            {bouquets.map((item) => (
-              <div key={item.id} className="bouquet-card snap-start min-w-[100%] sm:min-w-[calc(50%-0.75rem)] lg:min-w-[calc(33.333%-1rem)] flex flex-col gap-6 scroll-ml-4">
-                <div className="bg-primary/5 rounded-[2.5rem] p-4 border border-primary/10 group cursor-pointer h-full flex flex-col">
-                  {/* Image container */}
-                  <div className="relative w-full h-80 rounded-[2rem] overflow-hidden mb-6">
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="px-2 flex-grow flex flex-col">
-                    <h3 className="font-sans font-bold text-2xl text-primary">{item.name}</h3>
-                    <p className="text-dark/70 mt-3 font-sans line-clamp-3 mb-6 flex-grow">
-                      {item.description}
-                    </p>
+            {bouquets.map((item) => {
+              const isExpanded = expandedId === item.id;
+              return (
+                <div 
+                  key={item.id} 
+                  onClick={(e) => toggleExpand(item.id, e)}
+                  className={`bouquet-card snap-start flex flex-col gap-6 scroll-ml-4 transition-all duration-500 cursor-pointer ${isExpanded ? 'min-w-[100%] sm:min-w-[100%] lg:min-w-[66.666%]' : 'min-w-[100%] sm:min-w-[calc(50%-0.75rem)] lg:min-w-[calc(33.333%-1rem)]'}`}
+                >
+                  <div className={`bg-primary/5 rounded-[2.5rem] p-4 border transition-all duration-500 flex flex-col h-full ${isExpanded ? 'border-accent ring-2 ring-accent/20 shadow-2xl' : 'border-primary/10 group'}`}>
+                    {/* Image container */}
+                    <div className={`relative w-full rounded-[2rem] overflow-hidden mb-6 transition-all duration-500 bg-primary/5 ${isExpanded ? 'h-[28rem] md:h-[32rem]' : 'h-80'}`}>
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className={`w-full h-full transition-all duration-700 ${isExpanded ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
+                      />
+                    </div>
                     
-                    <a 
-                      href={`https://wa.me/556233002097?text=${whatsappMessage(item.name)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-auto w-full group relative overflow-hidden rounded-full bg-accent px-6 py-4 flex items-center justify-center gap-2 text-background font-sans font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg"
-                    >
-                      <span className="relative z-10 flex items-center gap-2">
-                        <MessageCircle size={18} />
-                        Pedir via WhatsApp
-                      </span>
-                      <div className="absolute inset-0 bg-primary/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
-                    </a>
+                    {/* Content */}
+                    <div className="px-4 flex-grow flex flex-col">
+                      <h3 className="font-sans font-bold text-2xl md:text-3xl text-primary tracking-tight">{item.name}</h3>
+                      <p className={`text-dark/70 mt-4 font-sans leading-relaxed flex-grow transition-all duration-300 ${isExpanded ? 'text-lg' : 'line-clamp-3 mb-6'}`}>
+                        {item.description}
+                      </p>
+                      
+                      <div className={`mt-8 transition-all duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+                        <a 
+                          href={`https://wa.me/556233002097?text=${whatsappMessage(item.name)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-full group relative overflow-hidden rounded-full bg-accent px-8 py-5 flex items-center justify-center gap-2 text-background font-sans font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg"
+                        >
+                          <span className="relative z-10 flex items-center gap-2">
+                            <MessageCircle size={20} />
+                            Encomendar via WhatsApp
+                          </span>
+                          <div className="absolute inset-0 bg-primary/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
+                        </a>
+                      </div>
+
+                      {/* Expand Hint */}
+                      {!isExpanded && (
+                        <div className="mt-4 text-[10px] font-mono text-primary/30 uppercase tracking-[0.2em]">
+                          Clique para ver mais
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
         

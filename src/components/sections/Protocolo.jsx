@@ -245,11 +245,11 @@ export const Protocolo = () => {
                       onClick={() => toggleExpand(item.num)}
                       className={`group flex flex-col h-full bg-primary/5 rounded-[2.5rem] overflow-hidden border border-primary/10 transition-all duration-500 cursor-pointer hover:shadow-xl ${isExpanded ? 'lg:col-span-2 ring-2 ring-accent shadow-2xl' : 'hover:-translate-y-2'}`}
                     >
-                      <div className={`relative overflow-hidden transition-all duration-500 ${isExpanded ? 'h-96' : 'h-64'}`}>
+                      <div className={`relative overflow-hidden transition-all duration-500 bg-primary/5 ${isExpanded ? 'h-[28rem] md:h-[32rem]' : 'h-64'}`}>
                         <img 
                           src={item.image} 
                           alt={item.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                          className={`w-full h-full transition-all duration-700 ${isExpanded ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
                         />
                       </div>
                       <div className="p-8 flex flex-col flex-grow">
